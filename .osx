@@ -15,14 +15,19 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 ###############################################################################
 
 # Set computer name (as done via System Preferences → Sharing)
-sudo scutil --set ComputerName "Macbook van CvB"
+sudo scutil --set ComputerName "MacbookPro van CvB"
 #sudo scutil --set HostName "0x6D746873"
 #sudo scutil --set LocalHostName "0x6D746873"
 #sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "0x6D746873"
 
-# Energy settings
+# Energy settings for all power supplies
+sudo pmset -a standbydelay 5400
+
+# Energy settings when mounted to power circuit
 sudo pmset -c displaysleep 0
 sudo pmset -c sleep 0
+
+# Energy settings with battery only
 sudo pmset -b displaysleep 2
 sudo pmset -b sleep 10
 
@@ -40,18 +45,16 @@ defaults write com.apple.systemuiserver menuExtras -array \
 	"/System/Library/CoreServices/Menu Extras/Volume.menu" \
 	"/System/Library/CoreServices/Menu Extras/Clock.menu"
 
-# Set sidebar icon size to medium // this is Apples default behavior
+# Set sidebar icon size to medium -- (this is Apples default behavior)
 defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 2
 
-# Always show scrollbars // this is Apples default behavior
+# Always show scrollbars (this is Apples default behavior)
 defaults write NSGlobalDomain AppleShowScrollBars -string "Automatic"
+# Possible values: `WhenScrolling`, `Automatic` and `Always`
 
 # Disable smooth scrolling
 # (Uncomment if you’re on an older Mac that messes up the animation)
 #defaults write NSGlobalDomain NSScrollAnimationEnabled -bool false
-
-# Increase window resize speed for Cocoa applications
-#defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
 
 # Expand save panel by default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
@@ -605,6 +608,11 @@ defaults write com.twitter.twitter-mac ShowFullNames -bool true
 
 # Show the app in the background if it’s not the front-most window
 defaults write com.twitter.twitter-mac HideInBackground -bool false
+
+# @todo: Still to add...
+# Install ChitChat via Brew Cask
+# Install Caprina via Brew Cask
+# Install is-online-cli via npm -g
 
 ###############################################################################
 # Kill affected applications                                                  #
