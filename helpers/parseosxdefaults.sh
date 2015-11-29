@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
-# Usage: `./parsedefaults com.apple.driver.AppleBluetoothMultitouch.trackpad`
-print_defaultswrite_for() {
+if [ -z "$1" ]; then
+  echo "Provide default to read" 1>&2
+  exit 1;
+fi
+
+DOMAIN=$1
+READ="$(defaults read $DOMAIN)"
+
+function print_defaultswrite_for() {
   while read line; do
     if [[ $line == "{" || $line == "}" ]]; then
       continue
@@ -20,17 +27,9 @@ print_defaultswrite_for() {
   done <<< "$1"
 }
 
-print_line() {
+function print_line() {
   echo "========================================================================="
 }
-
-if [ -z "$1" ]; then
-  echo "Provide default to read" 1>&2
-  exit 1;
-fi
-
-DOMAIN=$1
-READ="$(defaults read $1)"
 
 if [ -z "$2" ]; then
   echo "Printing write commands in no-override mode:"
@@ -38,12 +37,11 @@ if [ -z "$2" ]; then
   print_defaultswrite_for "${READ}"
   print_line
   exit 0;
+else
+  echo "Printing write commands in override mode:"
+  print_line
+  echo "defaults write $DOMAIN '{ "
+  print_defaultswrite_for "${READ}" "override"
+  echo " }'"
+  print_line
 fi
-
-# override mode
-echo "Printing write commands in no-override mode:"
-print_line
-echo "defaults write $DOMAIN '{ "
-print_defaultswrite_for "${READ}" "override"
-echo " }'"
-print_line
