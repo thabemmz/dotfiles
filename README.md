@@ -1,8 +1,12 @@
 # thabemmz dotfiles
-
 Forked from [mathias](https://github.com/mathiasbynens/dotfiles/) and influenced by [paul irish](https://github.com/paulirish/dotfiles).
 
-![Screenshot of my shell prompt](http://i.imgur.com/EkEtphC.png)
+## Todo
+- [ ] Complete and finalize list of `brew` packages and `brew cask` packages
+- [ ] Create complete `brew` install script
+- [ ] Do the same for `npm`
+- [ ] Investigate usage of `vim` (ditched it in this version)
+- [ ] Look at setup - this one is kinda stupid :flushed:
 
 ## Installation
 
