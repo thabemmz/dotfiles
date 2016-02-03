@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 # Shell prompt based on the Solarized Dark theme.
 # Screenshot: http://i.imgur.com/EkEtphC.png
 # Heavily inspired by @necolas’s prompt: https://github.com/necolas/dotfiles
@@ -29,7 +30,7 @@ prompt_git() {
 
 			# Check for unstaged changes.
 			if ! $(git diff-files --quiet --ignore-submodules --); then
-				s+='!';
+				s+='★ ';
 			fi;
 
 			# Check for untracked files.
@@ -51,7 +52,7 @@ prompt_git() {
 			git rev-parse --short HEAD 2> /dev/null || \
 			echo '(unknown)')";
 
-		[ -n "${s}" ] && s=" [${s}]";
+		[ -n "${s}" ] && s="${s}";
 
 		echo -e "${1}${branchName}${2}${s}";
 	else
@@ -64,19 +65,22 @@ if tput setaf 1 &> /dev/null; then
 	bold=$(tput bold);
 	reset=$(tput sgr0);
 	# Solarized colors, taken from http://git.io/solarized-colors.
+	bordeauxrood=$(tput setaf 9);
 	black=$(tput setaf 0);
 	blue=$(tput setaf 33);
 	cyan=$(tput setaf 37);
 	green=$(tput setaf 64);
 	orange=$(tput setaf 166);
-	purple=$(tput setaf 125);
+	purple=$(tput setaf 141);
 	red=$(tput setaf 124);
 	violet=$(tput setaf 61);
+	grey=$(tput setaf 256);
 	white=$(tput setaf 15);
-	yellow=$(tput setaf 136);
+	yellow=$(tput setaf 190);
 else
 	bold='';
 	reset="\e[0m";
+	bordeauxrood="\e[1;31m";
 	black="\e[1;30m";
 	blue="\e[1;34m";
 	cyan="\e[1;36m";
@@ -93,28 +97,24 @@ fi;
 if [[ "${USER}" == "root" ]]; then
 	userStyle="${red}";
 else
-	userStyle="${orange}";
+	userStyle="${bordeauxrood}";
 fi;
 
-# Highlight the hostname when connected via SSH.
+# Show user + host when SSH
 if [[ "${SSH_TTY}" ]]; then
-	hostStyle="${bold}${red}";
-else
-	hostStyle="${yellow}";
+	sshInfo="\[$userStyle\]\u\[$grey\]@\[${yellow}\]\h \[$grey\]in ";
 fi;
 
 # Set the terminal title to the current working directory.
 PS1="\[\033]0;\w\007\]";
 PS1+="\[${bold}\]\n"; # newline
-PS1+="\[${userStyle}\]\u"; # username
-PS1+="\[${white}\] at ";
-PS1+="\[${hostStyle}\]\h"; # host
-PS1+="\[${white}\] in ";
-PS1+="\[${green}\]\w"; # working directory
-PS1+="\$(prompt_git \"\[${white}\] on \[${violet}\]\" \"\[${blue}\]\")"; # Git repository details
+PS1+="$sshInfo"; # sshInfo
+PS1+="\[${yellow}\]\w"; # working directory
+PS1+="\$(prompt_git \"\[${grey}\] @ \[${purple}\]\" \"\[${blue}\]\")"; # Git repository details
 PS1+="\n";
-PS1+="\[${white}\]\$ \[${reset}\]"; # `$` (and reset color)
+PS1+="\[${white}\]❯ \[${reset}\]"; # `$` (and reset color)
 export PS1;
 
+# To clearify: the PS2 is used as the "Continuation interactive prompt" if the interactive is multiline
 PS2="\[${yellow}\]→ \[${reset}\]";
 export PS2;

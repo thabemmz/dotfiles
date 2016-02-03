@@ -1,27 +1,33 @@
-# Make vim the default editor.
-export EDITOR='vim';
+#!/usr/bin/env bash
+# Make nano the default editor.
+export EDITOR='nano';
 
 # Enable persistent REPL history for `node`.
 export NODE_REPL_HISTORY=~/.node_history;
-# Allow 32³ entries; the default is 1000.
-export NODE_REPL_HISTORY_SIZE='32768';
-# Use sloppy mode by default, matching web browsers.
-export NODE_REPL_MODE='sloppy';
-
-# Make Python use UTF-8 encoding for output to stdin, stdout, and stderr.
-export PYTHONIOENCODING='UTF-8';
 
 # Increase Bash history size. Allow 32³ entries; the default is 500.
 export HISTSIZE='32768';
-export HISTFILESIZE="${HISTSIZE}";
+export HISTFILESIZE="$HISTSIZE";
 # Omit duplicates and commands that begin with a space from history.
 export HISTCONTROL='ignoreboth';
 
+# timestamps for bash history. www.debian-administration.org/users/rossen/weblog/1
+# saved for later analysis
+HISTTIMEFORMAT='%F %T '
+export HISTTIMEFORMAT
+
+# Make some commands not show up in history
+export HISTIGNORE="ls:ls *:cd:cd -:pwd;exit:date:* --help"
+
 # Prefer US English and use UTF-8.
 export LANG='en_US.UTF-8';
-export LC_ALL='en_US.UTF-8';
+
+# Please don't set LC_ALL here. It is the mother of all LC's, meaning it will override
+# all LC settings. I need this 'cause I run scripts that use LC_CTYPE C (system default) instead of
+# a defined locale. Also read http://unix.stackexchange.com/questions/87745/what-does-lc-all-c-do
 
 # Highlight section titles in manual pages.
+# shellcheck disable=2154
 export LESS_TERMCAP_md="${yellow}";
 
 # Don’t clear the screen after quitting a manual page.

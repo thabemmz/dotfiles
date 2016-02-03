@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # Taken from https://mths.be/osx / adjusted to personal settings for osx
-
 echo "Setting OSX Defaults..."
 
 # Ask for the administrator password upfront
