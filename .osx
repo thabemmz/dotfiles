@@ -11,6 +11,7 @@ while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 ###############################################################################
 # General UI/UX                                                               #
 ###############################################################################
+echo "General UI / UX"
 
 # Set computer name (as done via System Preferences → Sharing)
 sudo scutil --set ComputerName "MacbookPro van CvB"
@@ -93,9 +94,9 @@ defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
 # Set a custom wallpaper image. `DefaultDesktop.jpg` is already a symlink, and
 # all wallpapers are in `/Library/Desktop Pictures/`. The default is `Wave.jpg`.
 # now defaults to dark grey / green Yosemite photo background
-rm -rf ~/Library/Application Support/Dock/desktoppicture.db
-sudo rm -rf /System/Library/CoreServices/DefaultDesktop.jpg
-sudo ln -s "Library/Desktop Pictures/El Capitan 2.jpg" /System/Library/CoreServices/DefaultDesktop.jpg
+# rm -rf ~/Library/Application Support/Dock/desktoppicture.db
+# sudo rm -rf /System/Library/CoreServices/DefaultDesktop.jpg
+# sudo ln -s "Library/Desktop Pictures/El Capitan 2.jpg" /System/Library/CoreServices/DefaultDesktop.jpg
 
 # Don't minify on double click on title bar
 defaults write NSGlobalDomain AppleMiniaturizeOnDoubleClick -bool false
@@ -103,6 +104,7 @@ defaults write NSGlobalDomain AppleMiniaturizeOnDoubleClick -bool false
 ###############################################################################
 # SSD-specific tweaks                                                         #
 ###############################################################################
+echo "SSD tweaks"
 
 # Disable local Time Machine snapshots - see `man tmutil` for more info on tmutil - its kinda cool!
 sudo tmutil disablelocal
@@ -127,6 +129,8 @@ sudo pmset -a sms 0
 ###############################################################################
 # My Trackpad settings, which are the ones I love and use                     #
 ###############################################################################
+echo "Trackpad"
+
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad "Clicking" '1'
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad "DragLock" '0'
 defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad "Dragging" '0'
@@ -155,6 +159,7 @@ defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad "version" '5'
 ###############################################################################
 # Mouse, keyboard, Bluetooth accessories, and input                 #
 ###############################################################################
+echo "Inputs"
 
 # Trackpad: enable tap to click for this user and for the login screen
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
@@ -192,6 +197,7 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 ###############################################################################
 # Screen                                                                      #
 ###############################################################################
+echo "Screen"
 
 # Require password immediately after sleep or screen saver begins
 defaults write com.apple.screensaver askForPassword -int 1
@@ -224,6 +230,7 @@ sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutio
 ###############################################################################
 # Finder                                                                      #
 ###############################################################################
+echo "Finder"
 
 # Set my home folder as the default location for new Finder windows
 # For other paths, use `PfLo` and `file:///full/path/here/`
@@ -305,6 +312,7 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 ###############################################################################
 # Dock, Dashboard, and hot corners                                            #
 ###############################################################################
+echo "Dock / Dashboard / Hotttt corners"
 
 # Enable highlight hover effect for the grid view of a stack (Dock)
 defaults write com.apple.dock mouse-over-hilite-stack -bool true
@@ -369,6 +377,7 @@ defaults write com.apple.dock wvous-tr-modifier -int 0
 ###############################################################################
 # Safari & WebKit                                                             #
 ###############################################################################
+echo "Safari"
 
 # Privacy: don’t send search queries to Apple
 defaults write com.apple.Safari UniversalSearchEnabled -bool false
@@ -377,6 +386,7 @@ defaults write com.apple.Safari SuppressSearchSuggestions -bool true
 ###############################################################################
 # Mail                                                                        #
 ###############################################################################
+echo "Mail"
 
 # Disable send and reply animations in Mail.app
 defaults write com.apple.mail DisableReplyAnimations -bool true
@@ -399,13 +409,14 @@ defaults write com.apple.mail SpellCheckingBehavior -string "NoSpellCheckingEnab
 ###############################################################################
 # Spotlight                                                                   #
 ###############################################################################
+echo "Spotlight"
 
 # Hide Spotlight tray-icon (and subsequent helper)
-sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
+# sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
 # Disable Spotlight indexing for any volume that gets mounted and has not yet
 # been indexed before.
 # Use `sudo mdutil -i off "/Volumes/foo"` to stop indexing any volume.
-#sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
+sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
 # Change indexing order and disable some search results
 # Yosemite-specific search results (remove them if you are using OS X 10.9 or older):
 # 	MENU_DEFINITION
@@ -447,6 +458,8 @@ sudo mdutil -E / > /dev/null
 ###############################################################################
 # Terminal & iTerm 2                                                          #
 ###############################################################################
+echo "Terminal"
+
 # Enable “focus follows mouse” for Terminal.app and all X11 apps
 # i.e. hover over a window and start typing in it without clicking first
 #defaults write com.apple.terminal FocusFollowsMouse -bool true
@@ -461,6 +474,7 @@ defaults write com.googlecode.iterm2 PromptOnClose -bool false
 ###############################################################################
 # Time Machine                                                                #
 ###############################################################################
+echo "Time Machine"
 
 # Prevent Time Machine from prompting to use new hard drives as backup volume
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
@@ -471,6 +485,7 @@ hash tmutil &> /dev/null && sudo tmutil disablelocal
 ###############################################################################
 # Activity Monitor                                                            #
 ###############################################################################
+echo "Activity Monitor"
 
 # Show the main window when launching Activity Monitor
 defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
@@ -488,6 +503,7 @@ defaults write com.apple.ActivityMonitor SortDirection -int 0
 ###############################################################################
 # Address Book, Dashboard, iCal, TextEdit, and Disk Utility                   #
 ###############################################################################
+echo "Address Book and some other apps"
 
 # Enable the debug menu in Address Book
 defaults write com.apple.addressbook ABShowDebugMenu -bool true
@@ -509,6 +525,7 @@ defaults write com.apple.DiskUtility advanced-image-options -bool true
 ###############################################################################
 # Mac App Store                                                               #
 ###############################################################################
+echo "Mac App Store"
 
 # Enable the WebKit Developer Tools in the Mac App Store
 defaults write com.apple.appstore WebKitDeveloperExtras -bool true
@@ -519,6 +536,7 @@ defaults write com.apple.appstore ShowDebugMenu -bool true
 ###############################################################################
 # Messages                                                                    #
 ###############################################################################
+echo "Messages"
 
 # Disable smart quotes as it’s annoying for messages that contain code
 defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticQuoteSubstitutionEnabled" -bool false
@@ -529,6 +547,7 @@ defaults write com.apple.messageshelper.MessageController SOInputLineSettings -d
 ###############################################################################
 # Google Chrome & Google Chrome Canary                                        #
 ###############################################################################
+echo "Chrome"
 
 # Allow installing user scripts via GitHub Gist or Userscripts.org
 defaults write com.google.Chrome ExtensionInstallSources -array "https://gist.githubusercontent.com/" "http://userscripts.org/*"
@@ -545,6 +564,7 @@ defaults write com.google.Chrome.canary PMPrintingExpandedStateForPrint2 -bool t
 ###############################################################################
 # Transmission.app                                                            #
 ###############################################################################
+echo "Transmission"
 
 # Use `~/Documents/Torrents` to store incomplete downloads
 defaults write org.m0k.transmission UseIncompleteDownloadFolder -bool true
@@ -564,6 +584,7 @@ defaults write org.m0k.transmission WarningLegal -bool false
 ###############################################################################
 # Twitter.app                                                                 #
 ###############################################################################
+echo "Twittah"
 
 # Disable smart quotes as it’s annoying for code tweets
 defaults write com.twitter.twitter-mac AutomaticQuoteSubstitutionEnabled -bool false
@@ -594,6 +615,7 @@ defaults write com.twitter.twitter-mac HideInBackground -bool false
 ###############################################################################
 # Spectacle.app                                                               #
 ###############################################################################
+echo "Spectacle"
 
 # Set up my preferred keyboard shortcuts
 defaults write com.divisiblebyzero.Spectacle MakeLarger -data 62706c6973743030d4010203040506191a582476657273696f6e58246f626a65637473592461726368697665725424746f7012000186a0a40708111255246e756c6cd4090a0b0c0d0e0f10596d6f64696669657273546e616d65576b6579436f64655624636c617373111a008002107c80035a4d616b654c6172676572d2131415165a24636c6173736e616d655824636c61737365735f1011537065637461636c6553686f7274637574a217185f1011537065637461636c6553686f7274637574584e534f626a6563745f100f4e534b657965644172636869766572d11b1c54726f6f74800108111a232d32373c424b555a62696c6e70727d828d96aaadc1cadcdfe40000000000000101000000000000001d000000000000000000000000000000e6
@@ -618,6 +640,7 @@ defaults write com.divisiblebyzero.Spectacle UndoLastMove -data 62706c6973743030
 ###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
+echo "Kill them all"
 
 for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
 	"Dock" "Finder" "Google Chrome" "Google Chrome Canary" "Mail" "Messages" \
