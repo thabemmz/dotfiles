@@ -79,6 +79,7 @@
 	# Show verbose output about tags, branches or remotes
 	tags = tag -l
 	branches = branch --all
+	br = branch --all
 	remotes = remote -v
 
 	# Amend the currently staged files to the latest commit
@@ -122,7 +123,6 @@
 	ds = diff --stat=160,120
 	dh1 = diff HEAD~1
 	pom = push origin master
-	br = branches
 	brrem = remote update origin --prune
 	po = push origin $1
 	dev = checkout develop
