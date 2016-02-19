@@ -30,7 +30,7 @@ prompt_git() {
 
 			# Check for unstaged changes.
 			if ! $(git diff-files --quiet --ignore-submodules --); then
-				s+=' *️⃣ ';
+				s+=' *️⃣';
 			fi;
 
 			# Check for untracked files.
