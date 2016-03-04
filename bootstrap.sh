@@ -39,7 +39,7 @@ function symlinkTheShit() {
       fi
     fi
 
-    echo "Createing symlink...";
+    echo "Creating symlink...";
     ln -sf "`pwd`/$fileName" "$homeDir/$fileName";
   done
 }
