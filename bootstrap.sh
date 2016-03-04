@@ -56,7 +56,7 @@ done
 
 if [ "$METHOD" == "symlink" ]; then
   symlinkTheShit ".*" "$DEST" "$FORCE";
-fi
+fi;
 
 if [ "$METHOD" == "rsync" ]; then
   if [ "$FORCE" == true ]; then
