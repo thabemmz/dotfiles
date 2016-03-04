@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# Add Brew PATH - this should be in .path eventually...
+export PATH="/usr/local/sbin:$PATH"
