@@ -18,7 +18,7 @@ function symlinkTheShit() {
   force=${3-false};
 
   if [[ -z "$filesToLoop" || -z "$homeDir" ]]; then
-    echo "Missing params in symlinkTheShit. Learn to check your code...";
+    echo "Missing params";
     exit;
   fi
 
