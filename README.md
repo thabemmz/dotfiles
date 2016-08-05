@@ -6,7 +6,7 @@ Forked from [mathias](https://github.com/mathiasbynens/dotfiles/) and influenced
 - [ ] Create complete `brew` install script
 - [ ] Do the same for `npm`
 - [ ] Investigate usage of `vim` (ditched it in this version)
-- [ ] Look at setup - this one is kinda stupid :flushed:
+- [ ] Look at setup - this one is kinda stupid (see https://github.com/thabemmz/dotfiles/issues/1)
 
 ## Installation
 **Warning:** If you want to give these dotfiles a try, you should first fork this repository, review the code, and remove things you don’t want or need. Don’t blindly use my settings unless you know what that entails. Use at your own risk!
