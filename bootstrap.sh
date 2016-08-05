@@ -12,7 +12,7 @@ function rsyncIt() {
   source ~/.bash_profile;
 }
 
-function symlinkTheShit() {
+function symlinkIt() {
   filesToLoop=$1;
   homeDir=$2;
   force=${3-false};
@@ -55,7 +55,7 @@ do
 done
 
 if [ "$METHOD" == "symlink" ]; then
-  symlinkTheShit ".*" "$DEST" "$FORCE";
+  symlinkIt ".*" "$DEST" "$FORCE";
 fi;
 
 if [ "$METHOD" == "rsync" ]; then
@@ -71,4 +71,4 @@ if [ "$METHOD" == "rsync" ]; then
 fi;
 
 unset rsyncIt;
-unset symlinkTheShit;
+unset symlinkIt;
