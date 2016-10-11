@@ -383,6 +383,9 @@ echo "Safari"
 defaults write com.apple.Safari UniversalSearchEnabled -bool false
 defaults write com.apple.Safari SuppressSearchSuggestions -bool true
 
+# Back via backspace
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled -bool true
+
 ###############################################################################
 # Mail                                                                        #
 ###############################################################################
