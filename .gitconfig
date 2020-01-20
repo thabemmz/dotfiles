@@ -79,7 +79,7 @@
 	# Show verbose output about tags, branches or remotes
 	tags = tag -l
 	branches = branch --all
-	br = branch --all
+	br = branch
 	remotes = remote -v
 
 	# Amend the currently staged files to the latest commit
