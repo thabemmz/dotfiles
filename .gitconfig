@@ -130,6 +130,7 @@
 	upd = "!git pull origin master && git pull origin develop"
 	delloc = "!git branch --delete \"$1\""
 	delrem = "!git push origin --delete \"$1\""
+  delall = "!git delloc \"$1\" && git delrem \"$1\""
 
 	#	Works on current branches (c stands for `current`)
 	cpo = "!git push origin $(git branch-name)"
@@ -141,9 +142,3 @@
 	featurefinish = "topic-finish"
 	releasefinish = "topic-finish"
 	hotfixfinish = "topic-finish"
-
-	# Todos
-	#cdelloc --> delete current branch locally
-	#cdelrem --> delete current branch remote
-	#cdelall --> delete current branch both locally and remote
-	#cfinish --> current branch is finished according to https://github.com/Enrise/MM-docs/blob/master/workflow/versioned.md#finish-topic-branch
