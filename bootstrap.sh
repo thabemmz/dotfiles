@@ -54,11 +54,11 @@ do
   esac
 done
 
-if [ "$METHOD" == "symlink" ]; then
+if [ "$METHOD" = "symlink" ]; then
   symlinkIt ".*" "$DEST" "$FORCE";
 fi;
 
-if [ "$METHOD" == "rsync" ]; then
+if [ "$METHOD" = "rsync" ]; then
   if [ "$FORCE" == true ]; then
     rsyncIt;
   else

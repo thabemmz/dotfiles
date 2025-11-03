@@ -1,10 +1,42 @@
 # thabemmz dotfiles
+
+## ⚠️ DEPRECATED - This repository is no longer maintained
+
+**This traditional dotfiles repository has been replaced by a chezmoi-managed version:**
+
+👉 **New Repository: [thabemmz/dotfiles-chezmoi](https://github.com/thabemmz/dotfiles-chezmoi)**
+
+### Why the change?
+
+The new chezmoi-based setup provides:
+- **Better state management** - knows what's been applied and what's changed
+- **Automated setup scripts** - Homebrew and npm packages install automatically
+- **Template support** - use variables and conditions in dotfiles
+- **Modern Zsh experience** - uses zsh4humans with Powerlevel10k
+- **One-command installation** - `chezmoi init --apply https://github.com/thabemmz/dotfiles-chezmoi.git`
+
+### Migration
+
+If you're currently using this repository, switch to the new one:
+
+```bash
+# Install chezmoi (if not already installed)
+brew install chezmoi
+
+# Initialize with the new repo
+chezmoi init --apply https://github.com/thabemmz/dotfiles-chezmoi.git
+```
+
+---
+
+## Original README (for historical reference)
+
 Forked from [mathias](https://github.com/mathiasbynens/dotfiles/) and influenced by [paul irish](https://github.com/paulirish/dotfiles).
 
 ## Todo
-- [ ] Complete and finalize list of `brew` packages and `brew cask` packages
-- [ ] Create complete `brew` install script
-- [ ] Do the same for `npm`
+- [x] Complete and finalize list of `brew` packages and `brew cask` packages
+- [x] Create complete `brew` install script
+- [x] Do the same for `npm`
 - [ ] Investigate usage of `vim` (ditched it in this version)
 - [ ] Look at setup - this one is kinda stupid (see https://github.com/thabemmz/dotfiles/issues/1)
 
@@ -74,6 +106,14 @@ When setting up a new Mac, you may want to install some common [Homebrew](http:/
 
 ```bash
 ./osx/brew.sh
+```
+
+### Install global npm packages
+
+After setting up Node.js (via nvm or direct installation), you can install commonly used global npm packages:
+
+```bash
+./osx/npm-install.sh
 ```
 
 ## Feedback

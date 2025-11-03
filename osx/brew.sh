@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
+
 # Install command-line tools using Homebrew.
+# This script installs the packages currently in use on this system.
 
 # Ask for the administrator password upfront.
 sudo -v
@@ -7,120 +9,69 @@ sudo -v
 # Keep-alive: update existing `sudo` time stamp until the script has finished.
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
-# Make sure we’re using the latest Homebrew.
+# Check if Homebrew is installed
+if ! command -v brew &> /dev/null; then
+    echo "Homebrew not found. Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+# Make sure we're using the latest Homebrew.
 brew update
 
 # Upgrade any already-installed formulae.
-brew upgrade --all
+brew upgrade
 
-# Install GNU core utilities (those that come with OS X are outdated).
-# Don’t forget to add `$(brew --prefix coreutils)/libexec/gnubin` to `$PATH`.
-brew install coreutils
+# Development Tools
+echo "Installing development tools..."
+brew install gh                  # GitHub CLI
+brew install git-crypt          # Transparent file encryption in git
+brew install gnupg              # GNU Privacy Guard
+brew install pinentry-mac       # PIN entry dialog for macOS
+brew install rbenv              # Ruby version manager
+brew install nvm                # Node version manager
+brew install yarn               # JavaScript package manager
 
-# Install some other useful utilities like `sponge`.
-brew install moreutils
-# Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed.
-brew install findutils
-# Install GNU `sed`, overwriting the built-in `sed`.
-brew install gnu-sed --with-default-names
+# Kubernetes Tools
+echo "Installing Kubernetes tools..."
+brew install k9s                # Terminal-based Kubernetes UI
+brew install kubeseal           # Sealed Secrets CLI
 
-# Install Bash 4.
-# Note: don’t forget to add `/usr/local/bin/bash` to `/etc/shells` before
-# running `chsh`.
-#brew install bash
+# Database & Caching
+echo "Installing database and caching tools..."
+brew install postgresql@14      # PostgreSQL database (version 14)
+brew install libpq              # PostgreSQL C API library
+brew install memcached          # High-performance memory object caching
 
-#brew tap homebrew/versions
-#brew install bash-completion2
+# Configuration & Dotfile Management
+echo "Installing configuration tools..."
+brew install chezmoi            # Manage dotfiles across machines
+brew install pkl                # Pickle configuration language
 
-brew tap caskroom/versions
-brew tap caskroom/cask
+# Image Processing
+echo "Installing image processing tools..."
+brew install imagemagick@6      # Image processing tools (version 6)
 
-# Install `wget` with IRI support.
-#brew install wget --with-iri
+# Networking
+echo "Installing networking tools..."
+brew install dnsmasq            # Lightweight DNS forwarder
 
-# Install more recent versions of some OS X tools.
-#brew install vim --override-system-vi
-brew tap homebrew/dupes
-brew install grep
-brew install openssh
-brew install screen
+# System Utilities
+echo "Installing system utilities..."
+brew install shared-mime-info   # MIME type database
 
-# PHP 5.5
-brew tap homebrew/php
-brew install php55 --with-gmp
-
-# Dev tools
-brew install bash
-brew install docker
-brew install docker-compose
-brew install docker-machine
-brew install elasticsearch
-brew install nvm
-brew install git
-brew install poppler
-brew install postgis
-brew install postgresql
-brew install python
-brew install rabbitmq
-brew install shellcheck
-brew install sqlite
-brew install maven
-brew install hub
-brew install jq
-brew install groovy
-brew install logstash
-
-# Install font tools.
-# brew tap bramstein/webfonttools
-# brew install sfnt2woff
-# brew install sfnt2woff-zopfli
-# brew install woff2
-
-# Install some CTF tools; see https://github.com/ctfs/write-ups.
-# brew install aircrack-ng
-# brew install bfg
-# brew install binutils
-# brew install binwalk
-# brew install cifer
-# brew install dex2jar
-# brew install dns2tcp
-# brew install fcrackzip
-# brew install foremost
-# brew install hashpump
-# brew install hydra
-# brew install john
-# brew install knock
-# brew install netpbm
-# brew install nmap
-# brew install pngcheck
-# brew install socat
-# brew install sqlmap
-# brew install tcpflow
-# brew install tcpreplay
-# brew install tcptrace
-# brew install ucspi-tcp # `tcpserver` etc.
-# brew install xpdf
-# brew install xz
-
-# Install other useful binaries.
-# brew install ack
-# brew install dark-mode
-# brew install exiv2
-# brew install git
-# brew install git-lfs
-# brew install imagemagick --with-webp
-# brew install lua
-# brew install lynx
-# brew install p7zip
-# brew install pigz
-# brew install pv
-# brew install rename
-# brew install rhino
-# brew install speedtest_cli
-# brew install ssh-copy-id
-# brew install tree
-# brew install webkit2png
-# brew install zopfli
+# GUI Applications (Casks)
+echo "Installing GUI applications..."
+brew install --cask altair-graphql-client    # GraphQL client
+brew install --cask anythingllm              # LLM interface
+brew install --cask appflowy                 # Notion alternative
+brew install --cask warp                     # Modern terminal
 
 # Remove outdated versions from the cellar.
 brew cleanup
+
+echo "Homebrew installation complete!"
+echo ""
+echo "Note: Don't forget to:"
+echo "  - Add Homebrew bash to /etc/shells and set as default shell if desired"
+echo "  - Initialize nvm (see .bash_profile for configuration)"
+echo "  - Initialize rbenv (add 'eval \"\$(rbenv init -)\"' to your profile)"
